@@ -8,7 +8,10 @@
 05. Redux
 06. gRPC-web
 
+![](capture.png)
+
 #### TODO
 01. Dockerizing
 02. Kubernetes Deployment
 03. Istio Setup
+
