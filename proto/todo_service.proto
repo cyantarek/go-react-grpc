@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package todo;
+
+message TodoRequest {
+    string task = 1;
+}
+
+message TodoResponse {
+    string id = 1;
+    string task = 2;
+    bool status = 3;
+    string created_at = 4;
+    string updated_at = 5;
+}
+
+message CommonRequest {
+    string id = 1;
+}
+
+message CommonResponse {
+    string message = 1;
+}
+
+message AllTodoResponse {
+    repeated TodoResponse todo_list = 1;
+}
+
+service TodoService {
+    rpc GetAllTodo(CommonRequest) returns (AllTodoResponse);
+    rpc CreateTodo(TodoRequest) returns (TodoResponse);
+    rpc CompleteTodo(CommonRequest) returns (CommonResponse);
+    rpc UndoTodo(CommonRequest) returns (CommonResponse);
+    rpc DeleteTodo(CommonRequest) returns (CommonResponse);
+}

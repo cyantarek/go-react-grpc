@@ -1,32 +1,63 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import * as actions from "../../actions"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {connect} from "react-redux";
+import Header from "../Header/Header";
+import UserInput from "../UserInput/UserInput";
+import {MoonLoader} from "react-spinners";
+import TodoList from "../TodoList/TodoList";
+import NoTodo from "../NoTodo/NoTodo";
 
-const {HelloServiceClient} = require("../../api/hello/hello_service_grpc_web_pb");
-const {HelloRequest} = require("../../api/hello/hello_service_pb");
+function App(props) {
+    useEffect(() => {
+        props.fetchTodo();
+    }, []);
 
-let client = new HelloServiceClient("http://localhost:9090", null, null);
+    const [userInput, setUserInput] = useState("");
 
-function App() {
-    const callGrpcService = () => {
-        let req = new HelloRequest();
-        req.setName("Cyan Tarek");
-
-        client.sayHello(req, {}, (err, response) => {
-            if (response == null) {
-                console.log(err)
-            }else {
-                console.log(response.toObject().message)
-            }
-        })
+    const handleUserInput = (e) => {
+        setUserInput(e.target.value)
     };
 
-    callGrpcService();
+    const handleTodoSubmit = (e) => {
+        e.preventDefault();
+
+        props.createTodo({task: userInput});
+        setUserInput("")
+    };
 
     return (
-        <div className="App">
-            Hello World
+        <div className="container pt-5">
+            <div className="row">
+                <div className="col-8 offset-2 text-center header">
+                    <Header/>
+                </div>
+            </div>
+            <div className="row mt-5">
+                <div className={"container"}>
+                    <div className="col-8 offset-2">
+                        <UserInput value={userInput} onChange={handleUserInput} onSubmit={handleTodoSubmit}/>
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                {props.commonState.loading ? (<div className="col-8 offset-2 d-flex justify-content-center">
+                    <MoonLoader/>
+                </div>) : (<div className="col-8 offset-2 d-block justify-content-center">
+                    <TodoList/>
+                </div>)}
+            </div>
+            {props.todoState.todo.length === 0 && !props.commonState.loading ? (<NoTodo/>) : null}
         </div>
     );
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        commonState: state.commonState,
+        todoState: state.todoState,
+    };
+}
+
+export default connect(mapStateToProps, actions)(App);

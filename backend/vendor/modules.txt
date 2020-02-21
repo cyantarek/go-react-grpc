@@ -1,119 +1,45 @@
 # github.com/BurntSushi/toml v0.3.1
 github.com/BurntSushi/toml
-# github.com/asaskevich/govalidator v0.0.0-20190424111038-f61b66f89f4a
-github.com/asaskevich/govalidator
-# github.com/gogo/gateway v1.1.0
-github.com/gogo/gateway
-# github.com/gogo/protobuf v1.2.1
-github.com/gogo/protobuf/jsonpb
-github.com/gogo/protobuf/proto
-github.com/gogo/protobuf/types
-github.com/gogo/protobuf/sortkeys
-# github.com/golang/mock v1.3.1
-github.com/golang/mock/gomock
 # github.com/golang/protobuf v1.3.2
-github.com/golang/protobuf/descriptor
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/protoc-gen-go/descriptor
+github.com/golang/protobuf/ptypes
 github.com/golang/protobuf/ptypes/any
-github.com/golang/protobuf/ptypes/struct
-github.com/golang/protobuf/jsonpb
 github.com/golang/protobuf/ptypes/duration
 github.com/golang/protobuf/ptypes/timestamp
-github.com/golang/protobuf/ptypes/wrappers
-github.com/golang/protobuf/ptypes
-# github.com/grpc-ecosystem/go-grpc-middleware v1.1.0
-github.com/grpc-ecosystem/go-grpc-middleware/logging/zap
-github.com/grpc-ecosystem/go-grpc-middleware
-github.com/grpc-ecosystem/go-grpc-middleware/logging
-github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap
-github.com/grpc-ecosystem/go-grpc-middleware/tags/zap
-github.com/grpc-ecosystem/go-grpc-middleware/tags
-# github.com/grpc-ecosystem/grpc-gateway v1.12.1
-github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger/options
-github.com/grpc-ecosystem/grpc-gateway/runtime
-github.com/grpc-ecosystem/grpc-gateway/utilities
-github.com/grpc-ecosystem/grpc-gateway/internal
 # github.com/jinzhu/configor v1.1.1
 github.com/jinzhu/configor
-# github.com/konsorten/go-windows-terminal-sequences v1.0.1
-github.com/konsorten/go-windows-terminal-sequences
-# github.com/labstack/gommon v0.3.0
-github.com/labstack/gommon/email
-github.com/labstack/gommon/random
-# github.com/sebest/logrusly v0.0.0-20180315190218-3235eccb8edc
-github.com/sebest/logrusly
-# github.com/segmentio/go-loggly v0.5.0
-github.com/segmentio/go-loggly
-# github.com/sirupsen/logrus v1.4.2
-github.com/sirupsen/logrus
-# go.uber.org/atomic v1.5.0
-go.uber.org/atomic
-# go.uber.org/multierr v1.3.0
-go.uber.org/multierr
-# go.uber.org/tools v0.0.0-20190618225709-2cfd321de3ee
-go.uber.org/tools/update-license
-# go.uber.org/zap v1.13.0
-go.uber.org/zap
-go.uber.org/zap/zapcore
-go.uber.org/zap/internal/bufferpool
-go.uber.org/zap/buffer
-go.uber.org/zap/internal/color
-go.uber.org/zap/internal/exit
-# golang.org/x/lint v0.0.0-20190930215403-16217165b5de
-golang.org/x/lint/golint
-golang.org/x/lint
 # golang.org/x/net v0.0.0-20191209160850-c0dbc17a3553
 golang.org/x/net/context
-golang.org/x/net/html
-golang.org/x/net/trace
-golang.org/x/net/html/atom
-golang.org/x/net/internal/timeseries
+golang.org/x/net/http/httpguts
 golang.org/x/net/http2
 golang.org/x/net/http2/hpack
-golang.org/x/net/http/httpguts
 golang.org/x/net/idna
-# golang.org/x/sys v0.0.0-20191220220014-0732a990476f
+golang.org/x/net/internal/timeseries
+golang.org/x/net/trace
+# golang.org/x/sys v0.0.0-20191228213918-04cbcbbfeed8
 golang.org/x/sys/unix
 # golang.org/x/text v0.3.2
 golang.org/x/text/secure/bidirule
+golang.org/x/text/transform
 golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
-golang.org/x/text/transform
-# golang.org/x/tools v0.0.0-20191220234730-f13409bbebaf
-golang.org/x/tools/go/analysis
-golang.org/x/tools/go/ast/astutil
-golang.org/x/tools/go/gcexportdata
-golang.org/x/tools/go/packages
-golang.org/x/tools/go/types/objectpath
-golang.org/x/tools/go/buildutil
-golang.org/x/tools/go/analysis/passes/inspect
-golang.org/x/tools/go/ast/inspector
-golang.org/x/tools/go/types/typeutil
-golang.org/x/tools/go/internal/gcimporter
-golang.org/x/tools/go/internal/packagesdriver
-golang.org/x/tools/internal/gopathwalk
-golang.org/x/tools/internal/semver
-golang.org/x/tools/internal/fastwalk
 # google.golang.org/genproto v0.0.0-20190927181202-20e1ac93f88c
-google.golang.org/genproto/googleapis/api/annotations
-google.golang.org/genproto/googleapis/api/httpbody
-google.golang.org/genproto/protobuf/field_mask
 google.golang.org/genproto/googleapis/rpc/status
 # google.golang.org/grpc v1.25.1
 google.golang.org/grpc
-google.golang.org/grpc/codes
-google.golang.org/grpc/grpclog
-google.golang.org/grpc/status
-google.golang.org/grpc/metadata
 google.golang.org/grpc/backoff
 google.golang.org/grpc/balancer
 google.golang.org/grpc/balancer/base
 google.golang.org/grpc/balancer/roundrobin
+google.golang.org/grpc/binarylog/grpc_binarylog_v1
+google.golang.org/grpc/codes
 google.golang.org/grpc/connectivity
 google.golang.org/grpc/credentials
+google.golang.org/grpc/credentials/internal
 google.golang.org/grpc/encoding
 google.golang.org/grpc/encoding/proto
+google.golang.org/grpc/grpclog
 google.golang.org/grpc/internal
 google.golang.org/grpc/internal/backoff
 google.golang.org/grpc/internal/balancerload
@@ -125,46 +51,18 @@ google.golang.org/grpc/internal/grpcrand
 google.golang.org/grpc/internal/grpcsync
 google.golang.org/grpc/internal/resolver/dns
 google.golang.org/grpc/internal/resolver/passthrough
+google.golang.org/grpc/internal/syscall
 google.golang.org/grpc/internal/transport
 google.golang.org/grpc/keepalive
+google.golang.org/grpc/metadata
 google.golang.org/grpc/naming
 google.golang.org/grpc/peer
+google.golang.org/grpc/reflection
+google.golang.org/grpc/reflection/grpc_reflection_v1alpha
 google.golang.org/grpc/resolver
 google.golang.org/grpc/serviceconfig
 google.golang.org/grpc/stats
+google.golang.org/grpc/status
 google.golang.org/grpc/tap
-google.golang.org/grpc/credentials/internal
-google.golang.org/grpc/binarylog/grpc_binarylog_v1
-google.golang.org/grpc/internal/syscall
-# gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc
-gopkg.in/alexcesaro/quotedprintable.v3
-# gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
-gopkg.in/gomail.v2
 # gopkg.in/yaml.v2 v2.2.3
 gopkg.in/yaml.v2
-# honnef.co/go/tools v0.0.1-2019.2.3
-honnef.co/go/tools/cmd/staticcheck
-honnef.co/go/tools/lint
-honnef.co/go/tools/lint/lintutil
-honnef.co/go/tools/simple
-honnef.co/go/tools/staticcheck
-honnef.co/go/tools/stylecheck
-honnef.co/go/tools/unused
-honnef.co/go/tools/config
-honnef.co/go/tools/facts
-honnef.co/go/tools/internal/cache
-honnef.co/go/tools/loader
-honnef.co/go/tools/lint/lintutil/format
-honnef.co/go/tools/version
-honnef.co/go/tools/arg
-honnef.co/go/tools/internal/passes/buildssa
-honnef.co/go/tools/internal/sharedcheck
-honnef.co/go/tools/lint/lintdsl
-honnef.co/go/tools/deprecated
-honnef.co/go/tools/functions
-honnef.co/go/tools/printf
-honnef.co/go/tools/ssa
-honnef.co/go/tools/ssautil
-honnef.co/go/tools/staticcheck/vrp
-honnef.co/go/tools/go/types/typeutil
-honnef.co/go/tools/internal/renameio

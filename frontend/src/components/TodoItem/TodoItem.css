@@ -1,0 +1,25 @@
+.complete {
+    font-style: italic;
+    text-decoration: line-through;
+}
+
+.header {
+    font-size: 3rem;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+.row {
+    padding-bottom: 50px;
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+card {
+    transition: background-color 0.3s ease;
+}
