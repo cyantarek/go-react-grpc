@@ -7,3 +7,8 @@
 04. React
 05. Redux
 06. gRPC-web
+
+#### TODO
+01. Dockerizing
+02. Kubernetes Deployment
+03. Istio Setup
