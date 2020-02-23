@@ -1,15 +1,12 @@
 FROM golang:latest as builder
-
-COPY . /mail-core
-WORKDIR /mail-core
-
-RUN cd cmd/mail-core && CGO_ENABLED=0 GOOS=linux go build -mod=vendor -o mail-core
+COPY backend /todo/
+WORKDIR /todo
+RUN cd cmd/todo && CGO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -o todo
+RUN chmod +x cmd/todo
 
 FROM alpine:latest
-
 WORKDIR /root/
+COPY --from=builder /todo .
+EXPOSE 5200
 
-COPY --from=builder /mail-core/cmd/mail-core .
-COPY --from=builder /mail-core/configs ./configs
-
-ENTRYPOINT [ "./mail-core" ]
+ENTRYPOINT [ "./cmd/todo/todo" ]

@@ -1,20 +1,15 @@
 import {FETCH_TODO, SET_LOADING} from "./types";
 
-const {HelloServiceClient} = require("../api/hello/hello_service_grpc_web_pb");
-const {HelloRequest} = require("../api/hello/hello_service_pb");
-
-let helloClient = new HelloServiceClient("http://localhost:9090", null, null);
-
 export const setLoading = (value) => {
   return dispatch => {
-      dispatch({action: SET_LOADING, payload: value})
+      dispatch({type: SET_LOADING, payload: value})
   }
 };
 
 const {TodoServiceClient} = require("../api/todo/todo_service_grpc_web_pb");
 const {TodoRequest, CommonRequest} = require("../api/todo/todo_service_pb");
 
-let todoClient = new TodoServiceClient("http://localhost:9090", null, null);
+let todoClient = new TodoServiceClient("todo-envoy-service:9090", null, null);
 
 export const fetchTodo = () => {
     return dispatch => {
@@ -23,7 +18,8 @@ export const fetchTodo = () => {
         dispatch({type: SET_LOADING, payload: true});
         todoClient.getAllTodo(req, {}, (err, resp) => {
             if (resp == null) {
-                console.log(err)
+                console.log(err);
+                dispatch({type: SET_LOADING, payload: false});
             }else {
                 dispatch({type: FETCH_TODO, payload: resp.toObject().todoListList});
                 dispatch({type: SET_LOADING, payload: false});
@@ -40,13 +36,15 @@ export const completeTodo = (id) => {
         dispatch({type: SET_LOADING, payload: true});
         todoClient.completeTodo(req, {}, (err, resp) => {
             if (resp == null) {
-                console.log(err)
+                console.log(err);
+                dispatch({type: SET_LOADING, payload: false});
             }else {
                 let req = new CommonRequest();
 
                 todoClient.getAllTodo(req, {}, (err, resp) => {
                     if (resp == null) {
-                        console.log(err)
+                        console.log(err);
+                        dispatch({type: SET_LOADING, payload: false});
                     }else {
                         dispatch({type: FETCH_TODO, payload: resp.toObject().todoListList});
                         dispatch({type: SET_LOADING, payload: false});
@@ -65,13 +63,15 @@ export const undoTodo = (id) => {
         dispatch({type: SET_LOADING, payload: true});
         todoClient.undoTodo(req, {}, (err, resp) => {
             if (resp == null) {
-                console.log(err)
+                console.log(err);
+                dispatch({type: SET_LOADING, payload: false});
             }else {
                 let req = new CommonRequest();
 
                 todoClient.getAllTodo(req, {}, (err, resp) => {
                     if (resp == null) {
-                        console.log(err)
+                        console.log(err);
+                        dispatch({type: SET_LOADING, payload: false});
                     }else {
                         dispatch({type: FETCH_TODO, payload: resp.toObject().todoListList});
                         dispatch({type: SET_LOADING, payload: false});
