@@ -1,17 +1,23 @@
 # A Complete Full Stack gRPC Project
 
 ##### Tech Stack
+
+###### Backend
 01. Go
-02. gRPC & Protobuf
+02. gRPC & Protocol Buffers
 03. MongoDB Atlas
-04. React
-05. Redux
-06. gRPC-web
+
+###### Frontend
+01. React
+02. Redux
+03. gRPC-web
+
+###### Deployment
+01. Docker
+02. Kubernetes
 
 ![](capture.png)
 
 #### TODO
-01. Dockerizing
-02. Kubernetes Deployment
-03. Istio Setup
+01. Istio Layer Setup
 
