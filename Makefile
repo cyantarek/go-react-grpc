@@ -20,12 +20,10 @@ dockerize-backend:
 kubernetes-deploy:
 	kubectl apply -f frontend/frontend-deployment.yml
 	kubectl apply -f backend/build/kubernetes/backend-deployment.yml
-	#kubectl apply -f envoy-proxy/envoy-deployment.yml
 
 kubernetes-destroy:
 	kubectl delete -f frontend/frontend-deployment.yml
 	kubectl delete -f backend/build/kubernetes/backend-deployment.yml
-	#kubectl delete -f envoy-proxy/envoy-deployment.yml
 
 kubernetes-redeploy:
 	kubectl patch deployment todo-backend-deployment -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"${RANDOM}\"}}}}}"
