@@ -9,7 +9,7 @@ export const setLoading = (value) => {
 const {TodoServiceClient} = require("../api/todo/todo_service_grpc_web_pb");
 const {TodoRequest, CommonRequest} = require("../api/todo/todo_service_pb");
 
-let todoClient = new TodoServiceClient("todo-envoy-service:9090", null, null);
+let todoClient = new TodoServiceClient("http://172.16.82.207:5300", null, null);
 
 export const fetchTodo = () => {
     return dispatch => {

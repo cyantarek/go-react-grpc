@@ -10,6 +10,7 @@ import (
 	"backend/pkg/utilities"
 	"context"
 	"fmt"
+	"github.com/improbable-eng/grpc-web/go/grpcweb"
 	"github.com/jinzhu/configor"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -17,15 +18,16 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+	"net/http"
 	"os"
 	"time"
 )
 
 var (
-	MongoUrl = ""
-	DbName = "todo_db"
+	MongoUrl       = ""
+	DbName         = "todo_db"
 	todoCollection = "todo"
-	Port = "5000"
+	Port           = "5000"
 )
 
 func main() {
@@ -39,6 +41,30 @@ func main() {
 	}
 	
 	gRPCServer := grpc.NewServer()
+	
+	gRPCWebServer := grpcweb.WrapServer(gRPCServer)
+	
+	httpServer := &http.Server{
+		Addr:":5300",
+		Handler: http.HandlerFunc(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if r.ProtoMajor == 2 {
+				gRPCWebServer.ServeHTTP(w, r)
+			} else {
+				w.Header().Set("Access-Control-Allow-Origin", "*")
+				w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+				w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, X-User-Agent, X-Grpc-Web")
+				w.Header().Set("grpc-status", "")
+				w.Header().Set("grpc-message", "")
+				if gRPCWebServer.IsGrpcWebRequest(r) {
+					gRPCWebServer.ServeHTTP(w, r)
+				}
+			}
+		})),
+	}
+	
+	go func() {
+		log.Fatal(httpServer.ListenAndServe())
+	}()
 	
 	helloHandlers, _ := hello_service.New()
 	hello.RegisterHelloServiceServer(gRPCServer, helloHandlers)

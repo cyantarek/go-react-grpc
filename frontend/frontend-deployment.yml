@@ -27,7 +27,7 @@ spec:
               containerPort: 80
           env:
             - name: BACKEND_URL
-              value: "http://todo-envoy-service:9090"
+              value: "todo-backend-service:5300"
 ---
 apiVersion: v1
 kind: Service
