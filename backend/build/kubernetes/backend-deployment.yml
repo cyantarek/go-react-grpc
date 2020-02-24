@@ -8,23 +8,19 @@ spec:
   selector:
     matchLabels:
       app: todo-backend
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         app: todo-backend
     spec:
-      dnsConfig:
-        options:
-          - name: ndots
-            value: "1"
       containers:
         - name: todo-backend
           image: tarek5/todo-grpc-backend:latest
           imagePullPolicy: Always
           ports:
             - name: todo-b-port
-              containerPort: 5200
+              containerPort: 5300
           env:
             - name: MONGO_URL
               value: "mongodb+srv://cyan:abcd123@noteshop-mtq7q.mongodb.net/test?retryWrites=true&w=majority"
@@ -37,5 +33,5 @@ spec:
   selector:
     app: todo-backend
   ports:
-    - port: 5200
+    - port: 5300
       targetPort: todo-b-port

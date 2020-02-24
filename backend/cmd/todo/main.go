@@ -40,7 +40,7 @@ func main() {
 		log.Fatal(err)
 	}
 	
-	gRPCServer := grpc.NewServer()
+	gRPCServer := grpc.NewServer(grpc.UnaryInterceptor(unaryInterceptor))
 	
 	gRPCWebServer := grpcweb.WrapServer(gRPCServer)
 	
@@ -90,6 +90,16 @@ func main() {
 	if err := gRPCServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %s", err)
 	}
+}
+
+func unaryInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+	host, _ := os.Hostname()
+	log.Printf("serving request from %s", host)
+	m, err := handler(ctx, req)
+	if err != nil {
+		log.Println("RPC failed with error %v", err)
+	}
+	return m, err
 }
 
 func loadConfig() config.Config {

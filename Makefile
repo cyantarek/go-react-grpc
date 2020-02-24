@@ -1,5 +1,7 @@
 .PHONY: proto kubernetes-redeploy
 
+RANDOM?=$(shell bash -c 'echo $$RANDOM')
+
 proto:
 	protoc -I ./proto --go_out=plugins=grpc:backend/api/todo --js_out=import_style=commonjs:frontend/src/api/todo --grpc-web_out=import_style=commonjs,mode=grpcwebtext:frontend/src/api/todo proto/todo_*.proto
 
@@ -26,5 +28,5 @@ kubernetes-destroy:
 	kubectl delete -f backend/build/kubernetes/backend-deployment.yml
 
 kubernetes-redeploy:
-	kubectl patch deployment todo-backend-deployment -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"${RANDOM}\"}}}}}"
-	kubectl patch deployment todo-frontend-deployment -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"${RANDOM}\"}}}}}"
+	kubectl patch deployment todo-backend-deployment -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"$(RANDOM)\"}}}}}"
+	kubectl patch deployment todo-frontend-deployment -p "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"build\":\"$(RANDOM)\"}}}}}"
