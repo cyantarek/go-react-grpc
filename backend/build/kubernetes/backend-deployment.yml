@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-backend-deployment
@@ -21,9 +21,15 @@ spec:
           ports:
             - name: todo-b-port
               containerPort: 5300
+            - name: todo-g-port
+              containerPort: 5200
           env:
             - name: MONGO_URL
-              value: "mongodb+srv://cyan:abcd123@noteshop-mtq7q.mongodb.net/test?retryWrites=true&w=majority"
+              value: "mongodb://cyan:abcd123@noteshop-shard-00-01-mtq7q.mongodb.net:27017/test?authSource=admin&replicaSet=NoteShop-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"
+      dnsConfig:
+        options:
+          - name: ndots
+            value: "1"
 ---
 apiVersion: v1
 kind: Service
@@ -34,4 +40,8 @@ spec:
     app: todo-backend
   ports:
     - port: 5300
+      name: http
       targetPort: todo-b-port
+    - port: 5200
+      name: grpc
+      targetPort: todo-g-port

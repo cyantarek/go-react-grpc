@@ -27,10 +27,11 @@ var (
 	MongoUrl       = ""
 	DbName         = "todo_db"
 	todoCollection = "todo"
-	Port           = "5000"
 )
 
 func main() {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	
 	cfg := loadConfig()
 	
 	addr := fmt.Sprintf("%s:%s", cfg.Server.Grpc.Host, cfg.Server.Grpc.Port)
@@ -73,11 +74,26 @@ func main() {
 		MongoUrl = os.Getenv("MONGO_URL")
 	}
 	
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(MongoUrl))
+	ips, err := net.LookupIP("noteshop-shard-00-01-mtq7q.mongodb.net")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Could not get IPs: %v\n", err)
+		os.Exit(1)
+	}
+	for _, ip := range ips {
+		fmt.Printf("noteshop-mtq7q.mongodb.net. IN A %s\n", ip.String())
+	}
+	
+	client, err := mongo.NewClient(options.Client().ApplyURI(MongoUrl))
 	if err != nil {
 		log.Fatal(err)
 	}
+	
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	err = client.Connect(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer client.Disconnect(ctx)
 	
 	todoDb := mongodb.NewTodoService(client.Database(DbName).Collection(todoCollection))
 	

@@ -1,4 +1,4 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-frontend-deployment
@@ -22,12 +22,12 @@ spec:
         - name: todo-frontend
           image: tarek5/todo-grpc-frontend:latest
           imagePullPolicy: Always
+          env:
+            - name: REACT_APP_BACKEND_URL
+              value: "http://192.168.99.100/api"
           ports:
             - name: todo-f-port
               containerPort: 80
-          env:
-            - name: BACKEND_URL
-              value: "todo-backend-service:5300"
 ---
 apiVersion: v1
 kind: Service
@@ -39,4 +39,5 @@ spec:
     app: todo-frontend
   ports:
     - port: 8096
+      nodePort: 30096
       targetPort: todo-f-port

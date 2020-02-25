@@ -9,7 +9,11 @@ export const setLoading = (value) => {
 const {TodoServiceClient} = require("../api/todo/todo_service_grpc_web_pb");
 const {TodoRequest, CommonRequest} = require("../api/todo/todo_service_pb");
 
-let todoClient = new TodoServiceClient("http://todo-backend-service:5300", null, null);
+let addr = process.env.REACT_APP_BACKEND_URL;
+
+console.log(addr);
+
+let todoClient = new TodoServiceClient("http://192.168.99.100/api", null, null);
 
 export const fetchTodo = () => {
     return dispatch => {

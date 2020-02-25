@@ -23,6 +23,14 @@ kubernetes-deploy:
 	kubectl apply -f frontend/frontend-deployment.yml
 	kubectl apply -f backend/build/kubernetes/backend-deployment.yml
 
+kubernetes-deploy-ingress-controller:
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+	# kubectl get pods --all-namespaces -l app.kubernetes.io/name=ingress-nginx
+
+kubernetes-deploy-ingress-resource:
+	kubectl apply -f ingress.yml
+	# kubectl get ingress todo-ingress
+
 kubernetes-destroy:
 	kubectl delete -f frontend/frontend-deployment.yml
 	kubectl delete -f backend/build/kubernetes/backend-deployment.yml

@@ -7,6 +7,6 @@ RUN chmod +x cmd/todo
 FROM alpine:latest
 WORKDIR /root/
 COPY --from=builder /todo .
-EXPOSE 5200
+EXPOSE 5200 5300
 
 ENTRYPOINT [ "./cmd/todo/todo" ]
